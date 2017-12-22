@@ -9,8 +9,9 @@ function printMessage(username, badgecount, points) {
 }
 
 function getProfile(username){
+    try{
 //connect to the api url(https://teamtreehouse.com/username.json)
-const request= https.get(`https://teamtreehouse.com/${username}.json`, response=> {
+      const request= https.get(`https://teamtreehouse.com/${username}.json`, response=> {
             let body= "";
             //read the data
             response.on('data', data=> {
@@ -27,8 +28,12 @@ const request= https.get(`https://teamtreehouse.com/${username}.json`, response=
             });
 
           });
-};
+          request.on("error", error => console.error(`Problem with request: ${error.message}`));
 
+      }catch(error) {
+        console.error(error.message);
+      }
+  };
  //process is a global object, argv is an aray property
 const users = process.argv.slice(2);
 users.forEach(getProfile);
