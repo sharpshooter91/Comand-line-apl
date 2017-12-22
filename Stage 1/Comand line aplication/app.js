@@ -14,15 +14,16 @@ const request= https.get(`https://teamtreehouse.com/${username}.json`, response=
   let body= "";
   //read the data
   response.on('data', data=> {
-    console.log('data:', data.toString());
     body+= data.toString();
   });
 
   response.on("end", ()=> {
     //Parse the data
-    console.log(body);
-    console.log(typeof body);
+    const profile= JSON.parse(body);
+    //console.dir(profile);
     //Print out the data
+    printMessage(username, profile.badges.length, profile.points.JavaScript);
+
   });
   //Parse the data
   //Print out the data
