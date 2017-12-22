@@ -20,11 +20,14 @@ function getProfile(username){
 
             response.on("end", ()=> {
               //Parse the data
-              const profile= JSON.parse(body);
-              //console.dir(profile);
-              //Print out the data
-              printMessage(username, profile.badges.length, profile.points.JavaScript);
-
+              try{
+                const profile= JSON.parse(body);
+                //console.dir(profile);
+                //Print out the data
+                printMessage(username, profile.badges.length, profile.points.JavaScript);
+              } catch (error){
+                console.error(error.message);
+              }
             });
 
           });
