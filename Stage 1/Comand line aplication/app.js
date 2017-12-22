@@ -29,5 +29,6 @@ const request= https.get(`https://teamtreehouse.com/${username}.json`, response=
           });
 };
 
-getProfile("chalkers");
-getProfile("alenaholligan");
+ //process is a global object, argv is an aray property
+const users = process.argv.slice(2);
+users.forEach(getProfile);
